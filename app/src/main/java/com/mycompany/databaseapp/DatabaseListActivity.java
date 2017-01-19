@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class DatabaseListActivity extends ListActivity {
     SQLiteDatabase database = null;
@@ -58,8 +61,9 @@ public class DatabaseListActivity extends ListActivity {
     public static String nameClickedName = "";
     public void onClickName(View v) {
         // 1) Possibly check for instance of first
-        Button b = (Button)v;
+        TextView b = (TextView) v;
         String buttonText = b.getText().toString();
+        Log.d("Name","name clicked name os " + nameClickedName);
         nameClickedName = buttonText;
     }
 
@@ -68,4 +72,8 @@ public class DatabaseListActivity extends ListActivity {
         Intent intent = new Intent(this, PlaceInformationActivity.class);
         startActivity(intent);
     }
+
+
 }
+
+
