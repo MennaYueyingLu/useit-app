@@ -3,12 +3,17 @@ package com.mycompany.databaseapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,6 +24,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class SmallMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,9 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -44,9 +57,19 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+        String stringPlaceLat = getInfo(DatabaseListActivity.nameClickedName, "place_cor_lat");
+        double placeLat = Double.parseDouble(stringPlaceLat);
+        String stringPlaceLon = getInfo(DatabaseListActivity.nameClickedName, "place_cor_lon");
+        double placeLon = Double.parseDouble(stringPlaceLon);
+        Log.d("Location", "Place Lat is " + placeLat);
+        Log.d("Location", "Place Lon is " + placeLon);
+        LatLng placeLatLon = new LatLng(placeLat, placeLon);
+
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = placeLatLon;
+        mMap.addMarker(new MarkerOptions().position(sydney).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
@@ -59,31 +82,6 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         Intent intent = new Intent(this, DatabaseListActivity.class);
         startActivity(intent);
     }
-    public LatLng placeLatLon = new LatLng(0,0);
-
-    public void getLatLon(){
-        String stringPlaceLat = getInfo(DatabaseListActivity.nameClickedName,"place_cor_lat");
-        double placeLat = Double.parseDouble(stringPlaceLat);
-        String stringPlaceLon = getInfo(DatabaseListActivity.nameClickedName,"place_cor_lon");
-        double placeLon = Double.parseDouble(stringPlaceLon);
-        Log.d("Location", "Place Lat is " + placeLat);
-        Log.d("Location", "Place Lon is " + placeLon);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // From PlaceInformation Activity
@@ -91,21 +89,22 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
     SQLiteDatabase database = null;
     Cursor dbCursor;
     DatabaseHelper dbHelper = new DatabaseHelper(this);
-    public String getInfo(String clickedPlaceName, String inputInfo ){
+
+    public String getInfo(String clickedPlaceName, String inputInfo) {
 
         database = dbHelper.getDataBase();
         Cursor cursor = null;
         String output = " ";
-        try{
-            cursor = database.rawQuery("SELECT " + inputInfo +  " FROM PLACES WHERE place_name=?", new String[] {clickedPlaceName + ""});
+        try {
+            cursor = database.rawQuery("SELECT " + inputInfo + " FROM PLACES WHERE place_name=?", new String[]{clickedPlaceName + ""});
 
-            if(cursor.getCount() > 0) {
+            if (cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 output = cursor.getString(cursor.getColumnIndex(inputInfo));
             }
 
             return output;
-        }finally {
+        } finally {
             if (database != null) {
                 dbHelper.close();
             }
@@ -113,9 +112,44 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
 
     }
 
-    public void setViewText(String elementId, String sql){
+    public void setViewText(String elementId, String sql) {
         // TextView text = (TextView) findViewById(R.id.+ elementId);
         // text.setText(getInfo(DatabaseListActivity.nameClickedName,sql));
     }
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("SmallMap Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
 }
