@@ -61,7 +61,7 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
     }
     public LatLng placeLatLon = new LatLng(0,0);
 
-    public void getLatLon( ){
+    public void getLatLon(){
         String stringPlaceLat = getInfo(DatabaseListActivity.nameClickedName,"place_cor_lat");
         double placeLat = Double.parseDouble(stringPlaceLat);
         String stringPlaceLon = getInfo(DatabaseListActivity.nameClickedName,"place_cor_lon");
