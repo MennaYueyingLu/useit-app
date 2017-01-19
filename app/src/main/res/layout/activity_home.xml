@@ -16,11 +16,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:onClick="onClickStartDatabaseListActivity"
-        android:text=" Setare List" />
-
-
+        android:text="List" />
     <Button
-        android:id="@+id/homeButton2"
+        android:id="@+id/smallMapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

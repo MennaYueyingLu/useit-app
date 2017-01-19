@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DatabaseApp</string>
+    <string name="app_name">Use It </string>
     <string name="title_activity_big_map">Map</string>
     <string name="title_activity_small_map">Map</string>
 </resources>

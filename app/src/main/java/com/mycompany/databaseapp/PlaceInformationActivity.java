@@ -95,18 +95,21 @@ public class PlaceInformationActivity extends AppCompatActivity {
 
     public void queryDataFromDatabase() {
 //       Get the text of the button clicked.
-
+        Log.d("Location", "This is a log");
         setViewText("place_info_title","place_name");
-
-
         TextView text = (TextView) findViewById(R.id.place_info_title);
-        //text.setText(getPlaceName(DatabaseListActivity.nameClickedName));
         text.setText(getInfo(DatabaseListActivity.nameClickedName,"place_name"));
 
         TextView textDescription = (TextView) findViewById(R.id.place_info_description);
-        //textDescription.setText(getDescription(DatabaseListActivity.nameClickedName));
         textDescription.setText(getInfo(DatabaseListActivity.nameClickedName,"place_description"));
-        // Repeat this for all other information too.
+        TextView textAddress = (TextView) findViewById(R.id.place_info_address);
+        textAddress.setText(getInfo(DatabaseListActivity.nameClickedName,"place_address"));
+        //TextView image = (TextView) findViewById(R.id.place_info_image);
+        //textDescription.setText(getDescription(DatabaseListActivity.nameClickedName));
+        TextView textLat = (TextView) findViewById(R.id.place_info_lat);
+        textLat.setText(getInfo(DatabaseListActivity.nameClickedName,"place_cor_lat"));
+        TextView textLon = (TextView) findViewById(R.id.place_info_lon);
+        textLon.setText(getInfo(DatabaseListActivity.nameClickedName,"place_cor_lon"));
     }
 
     public void onClickStartSmallMapActivity(View view) {
