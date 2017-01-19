@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Map</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <style>
+html,
+body {
+padding: 0;
+margin: 0;
+height: 100%;
+width: 100%;
+}
+#map {
+width: 100%;
+height: 100%;
+}
+</style>
+</head>
+<body>
+<div>
+    <p id="me"> "Hello World!" </p>
+</div>
+<div id='map'></div>
+<script>
+// var name = "Bob";
+document.getElementById("me").innerHTML = name;
+var map = L.map('map').fitWorld();
+var marker = L.marker([0, 0]).addTo(map);
+L.tileLayer(
+'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw',
+{
+id: 'mapbox.streets'
+}).addTo(map);
+</script>
+</body>
+</html>

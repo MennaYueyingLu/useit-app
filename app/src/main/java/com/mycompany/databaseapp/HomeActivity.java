@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onClickStartBigMapActivity(View view) {
-        Intent intent = new Intent(this, BigMapActivity.class);
+        Intent intent = new Intent(this, MapBoxActivity.class);
         startActivity(intent);
     }
 }
