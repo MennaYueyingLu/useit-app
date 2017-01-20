@@ -19,7 +19,9 @@ tools:context="com.mycompany.databaseapp.HomeActivity">
     android:layout_alignParentLeft="true"
     android:layout_alignParentBottom="true"
     android:onClick="onClickStartHomeActivity"
-    android:text="Home" />
+    android:text="To Start"
+        android:background="@drawable/button"
+        />
 
     <fragment
         android:id="@+id/map"

@@ -46,9 +46,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
 
         Typeface face= Typeface.createFromAsset(getAssets(), "font/Share-Bold.ttf");
         tv1.setTypeface(face);
-
-        Typeface face1= Typeface.createFromAsset(getAssets(), "font/Share-Bold.ttf");
-        tv2.setTypeface(face1);
+        tv2.setTypeface(face);
 
     }
 
