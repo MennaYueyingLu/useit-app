@@ -36,8 +36,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         }
     }
 
-    public static double userLat = 00;
-    public static double userLng = 00;
+    public static double userLat = 0 ;
+    public static double userLng = 0;
     public void onLocationChanged(Location location) {
         if (location != null) {
             Double userLocLat = location.getLatitude();
