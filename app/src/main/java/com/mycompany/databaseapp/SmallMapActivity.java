@@ -18,8 +18,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 public class SmallMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,6 +44,7 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
 
@@ -64,13 +68,26 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         double placeLon = Double.parseDouble(stringPlaceLon);
         Log.d("Location", "Place Lat is " + placeLat);
         Log.d("Location", "Place Lon is " + placeLon);
+        Log.d("Location", "User Lat is " + HomeActivity.userLat);
+        Log.d("Location", "User Lon is " + HomeActivity.userLng);
+        LatLng frauenkircheLatLon = new LatLng(51.0519,13.7415);
         LatLng placeLatLon = new LatLng(placeLat, placeLon);
 
+        LatLng userLatLon = new LatLng(HomeActivity.userLat,HomeActivity.userLng);
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = placeLatLon;
-        mMap.addMarker(new MarkerOptions().position(sydney).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions()
+                .position(placeLatLon)
+                .title(getInfo(DatabaseListActivity.nameClickedName, "place_name"))
+                .visible(true)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).showInfoWindow();
+
+        mMap.addMarker(new MarkerOptions()
+                .position(userLatLon)
+                .title("Your Location")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                frauenkircheLatLon, 13));
     }
 
     public void onClickStartHomeActivity(View view) {
