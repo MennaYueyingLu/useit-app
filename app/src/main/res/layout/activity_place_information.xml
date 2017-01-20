@@ -8,68 +8,179 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mycompany.databaseapp.PlaceInformationActivity">
+    tools:context="com.mycompany.databaseapp.PlaceInformationActivity"
+    android:background= "@color/white"
+    >
 
-    <TextView
-        android:id="@+id/place_info_title"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" "
-        android:layout_marginTop="132dp"
-        android:layout_below="@+id/place_info_fixed_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:gravity="center_horizontal"
+        >
 
-    <TextView
-        android:id="@+id/place_info_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/place_info_address"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/smallMapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:onClick="onClickStartSmallMapActivity"
-        android:text="Small Map" />
+            <TextView
 
-    <TextView
-        android:id="@+id/place_info_lat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/place_info_title"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="12dp"
-        android:layout_marginEnd="12dp" />
+                android:gravity="center"
+                android:id="@+id/place_info_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Place Title"
+                android:textSize= "@dimen/text_size_large"
+                android:textColor="@color/purple"
+                />
 
-    <TextView
-        android:id="@+id/place_info_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
-        android:layout_marginTop="53dp"
-        android:layout_below="@+id/place_info_lat"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/place_info_lon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/place_info_lat"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/text_address"
+                        android:text="Address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/place_info_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address Here "
+                        android:layout_below="@+id/place_info_title"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop= "@dimen/activity_vertical_margin"
+                        android:layout_weight="1"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size_medium"/>
+
+                    
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/smallMapButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:onClick="onClickStartSmallMapActivity"
+                    android:text="Show on Map"
+                    android:background="@drawable/button"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:id="@+id/text_description"
+                    android:text="Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:text="Describe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/place_info_description"
+                    android:layout_weight="1"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_small"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_LonLat"
+            android:text="Coordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_medium"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+        <TextView
+            android:id="@+id/text_mapgeeks"
+            android:text="(for all you map geeks)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_small" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+
+            <TextView
+                android:id="@+id/text_lon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Longitude "
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textColor="@color/purple"/>
+            <TextView
+                android:id="@+id/place_info_lon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textColor="@color/purple"/>
+            <TextView
+                android:id="@+id/text_lat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Latitude "
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textColor="@color/purple"/>
+            <TextView
+                android:id="@+id/place_info_lat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:layout_above="@+id/place_info_lon"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textColor="@color/purple"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
 

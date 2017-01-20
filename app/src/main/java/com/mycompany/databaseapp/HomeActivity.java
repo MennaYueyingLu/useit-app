@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,10 +14,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
+//import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 
 public class HomeActivity extends AppCompatActivity implements LocationListener{
     TextView latitudeField;
@@ -36,6 +39,14 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         } else {
             requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
         }
+
+        TextView tv1=(TextView)findViewById(R.id.text_locals);
+        TextView tv2=(TextView)findViewById(R.id.text_travellers);
+
+        Typeface face= Typeface.createFromAsset(getAssets(), "font/Share-Bold.ttf");
+        tv1.setTypeface(face);
+        tv2.setTypeface(face);
+
     }
 
     public static double userLat = 0 ;
@@ -83,4 +94,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         Intent intent = new Intent(this, BigMapActivity.class);
         startActivity(intent);
     }
+
+
+
 }
