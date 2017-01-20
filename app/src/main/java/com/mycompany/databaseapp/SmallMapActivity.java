@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,6 +42,7 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
 
@@ -64,13 +66,24 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         double placeLon = Double.parseDouble(stringPlaceLon);
         Log.d("Location", "Place Lat is " + placeLat);
         Log.d("Location", "Place Lon is " + placeLon);
+        double userLat = 51.0519;
+        double userLon = 13.7415;
+
         LatLng placeLatLon = new LatLng(placeLat, placeLon);
+        LatLng userLatLon = new LatLng(userLat,userLon);
 
+        mMap.addMarker(new MarkerOptions().position(placeLatLon).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions().position(userLatLon).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
+        mMap.addCircle(new CircleOptions()
+                .center(userLatLon)
+                .fillColor(0xffffd500)
+                .strokeColor(0xfff0790f)
+                .strokeWidth(3f)
+                .radius(50));
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = placeLatLon;
-        mMap.addMarker(new MarkerOptions().position(sydney).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                placeLatLon, 15));
     }
 
     public void onClickStartHomeActivity(View view) {
