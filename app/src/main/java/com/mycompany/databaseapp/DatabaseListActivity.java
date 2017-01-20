@@ -39,7 +39,7 @@ public class DatabaseListActivity extends ListActivity {
             dbCursor.moveToFirst();
             int index = dbCursor.getColumnIndex("place_name");
             while (!dbCursor.isAfterLast()) {
-                String record = dbCursor.getString(index);
+                String record = dbCursor.getString(index).trim();
                 list_values.add(record);
                 dbCursor.moveToNext();
             }

@@ -3,11 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <ListView
-        android:id="@android:id/list"
+    <LinearLayout
+        android:id="@+id/list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:background="#008736">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:text="Places To Go"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -16,4 +25,14 @@
         android:layout_alignParentBottom="true"
         android:onClick="onClickStartNewActivity"
         android:text="Albertinum" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_title"
+        android:background="#FFFFFF"
+        android:divider="#8dbab3"
+        android:dividerHeight="1px"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
