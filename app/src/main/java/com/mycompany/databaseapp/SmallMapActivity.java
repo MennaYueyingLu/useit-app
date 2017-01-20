@@ -21,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 public class SmallMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -66,15 +67,15 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
         double placeLon = Double.parseDouble(stringPlaceLon);
         Log.d("Location", "Place Lat is " + placeLat);
         Log.d("Location", "Place Lon is " + placeLon);
-        double userLat = 51.0519;
-        double userLon = 13.7415;
-
+        Log.d("Location", "User Lat is " + HomeActivity.userLat);
+        Log.d("Location", "User Lon is " + HomeActivity.userLng);
+        LatLng frauenkircheLatLon = new LatLng(51.0519,13.7415);
         LatLng placeLatLon = new LatLng(placeLat, placeLon);
-        LatLng userLatLon = new LatLng(userLat,userLon);
+
+        LatLng userLatLon = new LatLng(HomeActivity.userLat,HomeActivity.userLng);
 
         mMap.addMarker(new MarkerOptions().position(placeLatLon).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.addMarker(new MarkerOptions().position(userLatLon).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
+        Log.d("Location", "User userLatLon is " + userLatLon);
         mMap.addCircle(new CircleOptions()
                 .center(userLatLon)
                 .fillColor(0xffffd500)
@@ -83,7 +84,7 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
                 .radius(50));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                placeLatLon, 15));
+                frauenkircheLatLon, 13));
     }
 
     public void onClickStartHomeActivity(View view) {
