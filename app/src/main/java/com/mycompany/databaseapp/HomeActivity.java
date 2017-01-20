@@ -35,12 +35,17 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
             requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
         }
     }
+
+    public static double userLat = 00;
+    public static double userLng = 00;
     public void onLocationChanged(Location location) {
         if (location != null) {
-            Double lat = location.getLatitude();
-            Double lng = location.getLongitude();
-            Log.i("Location info: Lat", lat.toString());
-            Log.i("Location info: Lng", lng.toString());
+            Double userLocLat = location.getLatitude();
+            Double userLocLng = location.getLongitude();
+            userLat = userLocLat;
+            userLng = userLocLng;
+            Log.i("Location info: Lat", userLocLat.toString());
+            Log.i("Location info: Lng", userLocLng.toString());
         }
     }
 
