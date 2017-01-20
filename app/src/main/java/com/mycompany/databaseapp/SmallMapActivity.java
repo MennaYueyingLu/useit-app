@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -74,14 +75,16 @@ public class SmallMapActivity extends FragmentActivity implements OnMapReadyCall
 
         LatLng userLatLon = new LatLng(HomeActivity.userLat,HomeActivity.userLng);
 
-        mMap.addMarker(new MarkerOptions().position(placeLatLon).title(getInfo(DatabaseListActivity.nameClickedName, "place_name")));
-        Log.d("Location", "User userLatLon is " + userLatLon);
-        mMap.addCircle(new CircleOptions()
-                .center(userLatLon)
-                .fillColor(0xffffd500)
-                .strokeColor(0xfff0790f)
-                .strokeWidth(3f)
-                .radius(50));
+        mMap.addMarker(new MarkerOptions()
+                .position(placeLatLon)
+                .title(getInfo(DatabaseListActivity.nameClickedName, "place_name"))
+                .visible(true)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).showInfoWindow();
+
+        mMap.addMarker(new MarkerOptions()
+                .position(userLatLon)
+                .title("Your Location")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 frauenkircheLatLon, 13));
